@@ -107,16 +107,8 @@ async function onLoadMoreClick() {
 
   try {
     const imagesData = await fetchImages(query, page, perPage);
-    const fragment = document.createDocumentFragment();
 
-    imagesData.hits.forEach(image => {
-      const imageElement = document.createElement('div');
-      imageElement.classList.add('gallery-item');
-      imageElement.innerHTML = renderImages([image]);
-      fragment.appendChild(imageElement);
-    });
-
-    gallery.appendChild(fragment);
+    gallery.insertAdjacentHTML('beforeend', renderImages(imagesData.hits));
     initializeLightbox();
     smoothScroll();
 
